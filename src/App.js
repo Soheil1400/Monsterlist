@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import {useEffect} from "react";
+import {MonsterList, MonsterPage, Menu} from './Components'
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    useEffect(() => {
+        document.title = 'Monsters'
+    }, [])
+    return (
+        <div className={'App'}>
+            <BrowserRouter>
+                <Routes>
+                    <Route path={'/'} element={<Menu/>}>
+                        <Route index element={<div>Welcome To Monsters Site</div>}/>
+                        <Route path={'/Monsters'} element={<MonsterList/>}/>
+                        <Route path={'/Monsters/:MonsterId'} element={<MonsterPage/>}/>
+                    </Route>
+                </Routes>
+            </BrowserRouter>
+        </div>
+    );
 }
 
 export default App;
